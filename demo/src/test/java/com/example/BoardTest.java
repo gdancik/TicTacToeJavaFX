@@ -1,6 +1,9 @@
 package com.example;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,12 +24,17 @@ class BoardTest {
         assertTrue(board.isValid(0, 0));
         assertFalse(board.isValid(-1, 0));
         assertFalse(board.isValid(3, 0));
+        assertFalse(board.isValid(0, -1));
         assertFalse(board.isValid(0, 3));
         assertTrue(board.place(0, 0, 'X'));
         assertFalse(board.isValid(0, 0));
         assertFalse(board.place(0, 0, 'O'));
         assertFalse(board.place(1, 1, 'Z'));
         assertEquals('X', board.getCell(0, 0));
+        assertThrows(IndexOutOfBoundsException.class, () -> board.getCell(-1, 0));
+        assertThrows(IndexOutOfBoundsException.class, () -> board.getCell(3, 0));
+        assertThrows(IndexOutOfBoundsException.class, () -> board.getCell(0, -1));
+        assertThrows(IndexOutOfBoundsException.class, () -> board.getCell(0, 3));
     }
 
     /** Verifies win detection for rows, columns, and both diagonals. */
