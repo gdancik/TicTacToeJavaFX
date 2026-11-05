@@ -23,6 +23,23 @@ class PlayerTest {
         assertFalse(player.makeMove(board, -1, 0));
     }
 
+    /** Verifies both player types retain their configured marker. */
+    @Test
+    void playersExposeTheirConfiguredMarkers() {
+        Player human = new HumanPlayer('X', new Scanner(""));
+        Player cpu = new CpuPlayer('O', new Random(7));
+
+        assertEquals('X', human.getMarker());
+        assertEquals('O', cpu.getMarker());
+    }
+
+    /** Verifies player constructors reject markers outside the game rules. */
+    @Test
+    void playersRejectInvalidMarkers() {
+        assertThrows(IllegalArgumentException.class, () -> new HumanPlayer('Z', new Scanner("")));
+        assertThrows(IllegalArgumentException.class, () -> new CpuPlayer('Z', new Random(7)));
+    }
+
     /** Verifies the human player retries malformed and occupied coordinates. */
     @Test
     void humanRetriesMalformedAndOccupiedPositions() {
