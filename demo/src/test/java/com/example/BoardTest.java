@@ -69,4 +69,58 @@ class BoardTest {
         }
         assertTrue(board.checkWin());
     }
+    
+    /** Verifies that getCell rejects invalid coordinates. */
+    @Test
+    void getCellRejectsInvalidCoordinates() {
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> board.getCell(-1, 0));
+
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> board.getCell(3, 0));
+
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> board.getCell(0, -1));
+
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> board.getCell(0, 3));
+    }
+
+    /** Verifies that the board is formatted correctly. */
+     @Test
+    void formatsBoardCorrectly() {
+        String expected =
+                "  1   2   3\n" +
+                "1   |   |  \n" +
+                "  -----------\n" +
+                "2   |   |  \n" +
+                "  -----------\n" +
+                "3   |   |  \n";
+
+        assertEquals(expected, board.format());
+
+
+        board.place(0, 0, 'X');
+        assertTrue(board.format().contains("X"));
+    }
+
+    /** Verifies that display prints the formatted board. */
+    @Test
+    void displaysBoard() {
+        java.io.ByteArrayOutputStream output =
+                new java.io.ByteArrayOutputStream();
+
+        java.io.PrintStream original = System.out;
+
+        try {
+            System.setOut(new java.io.PrintStream(output));
+            board.display();
+        } finally {
+            System.setOut(original);
+        }
+
+        assertEquals(board.format() + System.lineSeparator(),
+                output.toString());
+    }
+
 }
