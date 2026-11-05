@@ -61,6 +61,15 @@ class PlayerTest {
         assertThrows(IllegalStateException.class, () -> cpu.makeMove(board));
     }
 
+    @Test
+    void isValidName() {
+        assertEquals("Player #1", HumanPlayer.getName());
+        assertEquals("CPU #1", CpuPlayer.getName());
+        assertThrows(IllegalArgumentException.class, () -> Player.setName(null));
+        assertThrows(IllegalArgumentException.class, () -> Player.setName("   "));
+        assertThrows(IllegalArgumentException.class, () -> Player.setName(""));
+    }
+
     /** Counts the occurrences of a marker on the supplied board. */
     private int countMarker(Board board, char marker) {
         int count = 0;
