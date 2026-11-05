@@ -4,13 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 
  * A player that chooses randomly from the currently available cells. 
  */
 public class CpuPlayer extends Player {
+    private static final AtomicInteger DEFAULT_NAME_SEQUENCE = new AtomicInteger(1);
+
     private final Random random;
+
+    /** Creates a CPU player using a randomly seeded generator and a unique default name. */
+    public CpuPlayer() {
+        this('O', new Random(), "CPU #" + DEFAULT_NAME_SEQUENCE.getAndIncrement());
+    }
 
     /**
      * Creates a CPU player with a randomly seeded move generator.
@@ -36,7 +44,11 @@ public class CpuPlayer extends Player {
      * @throws IllegalArgumentException if {@code marker} is not {@code X} or {@code O}
      */     
     public CpuPlayer(char marker, Random random) {
-        super(marker);
+        this(marker, random, "CPU (" + marker + ")");
+    }
+
+    private CpuPlayer(char marker, Random random, String name) {
+        super(marker, name);
         this.random = Objects.requireNonNull(random, "random");
     }
     
