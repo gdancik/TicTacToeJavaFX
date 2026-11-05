@@ -11,6 +11,7 @@ import java.util.Random;
  */
 public class CpuPlayer extends Player {
     private final Random random;
+    private static String name = "CPU #1";
 
     /**
      * Creates a CPU player with a randomly seeded move generator.
@@ -38,6 +39,11 @@ public class CpuPlayer extends Player {
     public CpuPlayer(char marker, Random random) {
         super(marker);
         this.random = Objects.requireNonNull(random, "random");
+        this.name = name;
+    }
+
+    public static String getName() {
+        return name;
     }
     
 

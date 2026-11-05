@@ -6,6 +6,7 @@ package com.example;
  */ 
 public abstract class Player {
     protected final char marker;
+    protected String name;
 
     /**
      * Creates a player with the given marker.
@@ -18,6 +19,12 @@ public abstract class Player {
             throw new IllegalArgumentException("A player marker must be X or O");
         }
         this.marker = marker;
+    }
+
+    public static void setName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Player name must not be blank");
+        }
     }
 
     /**
