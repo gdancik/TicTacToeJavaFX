@@ -10,6 +10,8 @@ import java.util.Scanner;
 public class HumanPlayer extends Player {
     private final Scanner scanner;
     private static String name = "Player #1";
+    private static int playerCount;
+    private static int nameReadIndex;
 
     /**
      * Creates a human player that reads moves from the supplied scanner.
@@ -22,11 +24,22 @@ public class HumanPlayer extends Player {
     public HumanPlayer(char marker, Scanner scanner) {
         super(marker);
         this.scanner = Objects.requireNonNull(scanner, "scanner");
+        if (marker == 'X') {
+            playerCount = 0;
+            nameReadIndex = 0;
+        }
+        playerCount++;
+        name = "Player #" + playerCount;
         this.name = name;
     }
 
     public static String getName() {
-        return name;
+        if (playerCount == 0) {
+            return name;
+        }
+        String result = "Player #" + ((nameReadIndex % playerCount) + 1);
+        nameReadIndex++;
+        return result;
     }
 
     /** Prompts for coordinates until this player's marker is placed successfully. */
