@@ -61,13 +61,34 @@ class PlayerTest {
         assertThrows(IllegalStateException.class, () -> cpu.makeMove(board));
     }
 
+    /** Verifies the player names are valid. */
     @Test
-    void isValidName() {
+    void testIsValidName() {
         assertEquals("Player #1", HumanPlayer.getName());
         assertEquals("CPU #1", CpuPlayer.getName());
         assertThrows(IllegalArgumentException.class, () -> Player.setName(null));
         assertThrows(IllegalArgumentException.class, () -> Player.setName("   "));
         assertThrows(IllegalArgumentException.class, () -> Player.setName(""));
+    }
+
+    /** Verifies that two human players cannot have the same name. */
+    @Test
+    void testTwoHumanPlayersWithSameName() {
+        HumanPlayer player1 = new HumanPlayer('X', new Scanner(""));
+        HumanPlayer player2 = new HumanPlayer('O', new Scanner(""));
+        
+        assertEquals("Player #1", player1.getName());
+        assertEquals("Player #2", player2.getName());
+    }
+
+    /** Verifies that two CPU players cannot have the same name. */
+    @Test
+    void testTwoCpuPlayersWithSameName() {
+        CpuPlayer cpu1 = new CpuPlayer('X', new Random());
+        CpuPlayer cpu2 = new CpuPlayer('O', new Random());
+        
+        assertEquals("CPU #1", cpu1.getName());
+        assertEquals("CPU #2", cpu2.getName());
     }
 
     /** Counts the occurrences of a marker on the supplied board. */
