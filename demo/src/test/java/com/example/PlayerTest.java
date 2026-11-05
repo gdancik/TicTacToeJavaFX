@@ -61,6 +61,67 @@ class PlayerTest {
         assertThrows(IllegalStateException.class, () -> cpu.makeMove(board));
     }
 
+@Test
+void cpuPlayerHasDefaultName() {
+    CpuPlayer player = new CpuPlayer('O', new Random(7));
+    assertEquals("CPU #1", player.getName());
+}
+
+@Test
+void humanPlayerCanChangeName() {
+    HumanPlayer player = new HumanPlayer('X', new Scanner(""));
+    assertDoesNotThrow(() -> player.setName("Alex"));
+}
+
+@Test
+void cpuPlayerCanChangeName() {
+    CpuPlayer player = new CpuPlayer('O', new Random(7));
+    player.setName("Computer");
+    assertEquals("Computer", player.getName());
+}
+
+@Test
+void humanPlayerCannotHaveNullName() {
+    HumanPlayer player = new HumanPlayer('X', new Scanner(""));
+    assertThrows(IllegalArgumentException.class,
+            () -> player.setName(null));
+}
+
+@Test
+void cpuPlayerCannotHaveNullName() {
+    CpuPlayer player = new CpuPlayer('O', new Random(7));
+    assertThrows(IllegalArgumentException.class,
+            () -> player.setName(null));
+}
+
+@Test
+void humanPlayerCannotHaveEmptyName() {
+    HumanPlayer player = new HumanPlayer('X', new Scanner(""));
+    assertThrows(IllegalArgumentException.class,
+            () -> player.setName(""));
+}
+
+@Test
+void cpuPlayerCannotHaveEmptyName() {
+    CpuPlayer player = new CpuPlayer('O', new Random(7));
+    assertThrows(IllegalArgumentException.class,
+            () -> player.setName(""));
+}
+
+@Test
+void humanPlayerCannotHaveWhitespaceName() {
+    HumanPlayer player = new HumanPlayer('X', new Scanner(""));
+    assertThrows(IllegalArgumentException.class,
+            () -> player.setName("   "));
+}
+
+@Test
+void cpuPlayerCannotHaveWhitespaceName() {
+    CpuPlayer player = new CpuPlayer('O', new Random(7));
+    assertThrows(IllegalArgumentException.class,
+            () -> player.setName("   "));
+}
+
     /** Counts the occurrences of a marker on the supplied board. */
     private int countMarker(Board board, char marker) {
         int count = 0;
