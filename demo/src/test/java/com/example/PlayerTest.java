@@ -40,6 +40,26 @@ class PlayerTest {
         assertThrows(IllegalArgumentException.class, () -> new CpuPlayer('Z', new Random(7)));
     }
 
+    /** Verifies default human player names are unique and assigned in order. */
+    @Test
+    void humanPlayersReceiveUniqueDefaultNames() {
+        HumanPlayer first = new HumanPlayer();
+        HumanPlayer second = new HumanPlayer();
+
+        assertEquals("Player #1", first.getName());
+        assertEquals("Player #2", second.getName());
+    }
+
+    /** Verifies default CPU player names are unique and assigned in order. */
+    @Test
+    void cpuPlayersReceiveUniqueDefaultNames() {
+        CpuPlayer first = new CpuPlayer();
+        CpuPlayer second = new CpuPlayer();
+
+        assertEquals("CPU #1", first.getName());
+        assertEquals("CPU #2", second.getName());
+    }
+
     /** Verifies the human player retries malformed and occupied coordinates. */
     @Test
     void humanRetriesMalformedAndOccupiedPositions() {
