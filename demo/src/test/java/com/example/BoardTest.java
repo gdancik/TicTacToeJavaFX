@@ -69,4 +69,28 @@ class BoardTest {
         }
         assertTrue(board.checkWin());
     }
+
+    @Test
+    void testNegativeRow() {
+    assertThrows(IndexOutOfBoundsException.class,
+            () -> board.getCell(-1, 0));
+}
+
+    @Test
+    void testRowTooLarge() {
+    assertThrows(IndexOutOfBoundsException.class,
+            () -> board.getCell(3, 0));
+}
+
+    @Test
+    void testNegativeColumn() {
+    assertThrows(IndexOutOfBoundsException.class,
+            () -> board.getCell(0, -1));
+}
+
+    @Test
+    void testColumnTooLarge() {
+    assertThrows(IndexOutOfBoundsException.class,
+            () -> board.getCell(0, 3));
+}
 }

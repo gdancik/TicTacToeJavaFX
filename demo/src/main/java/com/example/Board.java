@@ -61,7 +61,7 @@ public class Board {
      */
     public boolean isValid(int row, int column) {
         return row >= 0 && row < SIZE && column >= 0 && column < SIZE
-                && grid[row][column] == EMPTY;
+                 && grid[row][column] == EMPTY;
     }
 
     /**

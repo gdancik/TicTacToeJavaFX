@@ -9,6 +9,7 @@ import java.util.Scanner;
  */
 public class HumanPlayer extends Player {
     private final Scanner scanner;
+    private static int playerCount = 0; 
 
     /**
      * Creates a human player that reads moves from the supplied scanner.
@@ -21,6 +22,7 @@ public class HumanPlayer extends Player {
     public HumanPlayer(char marker, Scanner scanner) {
         super(marker);
         this.scanner = Objects.requireNonNull(scanner, "scanner");
+        setName("Player #" + (++playerCount));
     }
 
     /** Prompts for coordinates until this player's marker is placed successfully. */

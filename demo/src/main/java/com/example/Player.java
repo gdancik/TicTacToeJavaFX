@@ -7,6 +7,7 @@ package com.example;
 public abstract class Player {
     protected final char marker;
 
+    private String name;
     /**
      * Creates a player with the given marker.
      *
@@ -28,6 +29,17 @@ public abstract class Player {
     public char getMarker() {
         return marker;
     }
+
+    public String getName() {
+    return name;
+}
+
+public void setName(String name) {
+    if (name == null || name.trim().isEmpty()) {
+        throw new IllegalArgumentException("Name cannot be empty");
+    }
+    this.name = name;
+}
 
     /**
      * Makes a move on the supplied board.
