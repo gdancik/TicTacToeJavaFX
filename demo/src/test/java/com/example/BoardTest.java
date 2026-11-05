@@ -32,8 +32,17 @@ class BoardTest {
     /** Verifies win detection for rows, columns, and both diagonals. */
     @Test
     void detectsWinsAcrossRowsColumnsAndBothDiagonals() {
+        // Test all rows
         assertPlacesAndWins(new int[][]{{0, 0}, {0, 1}, {0, 2}});
+        assertPlacesAndWins(new int[][]{{1, 0}, {1, 1}, {1, 2}});
+        assertPlacesAndWins(new int[][]{{2, 0}, {2, 1}, {2, 2}});
+        
+        // Test all columns
+        assertPlacesAndWins(new int[][]{{0, 0}, {1, 0}, {2, 0}});
         assertPlacesAndWins(new int[][]{{0, 1}, {1, 1}, {2, 1}});
+        assertPlacesAndWins(new int[][]{{0, 2}, {1, 2}, {2, 2}});
+        
+        // Test both diagonals
         assertPlacesAndWins(new int[][]{{0, 0}, {1, 1}, {2, 2}});
         assertPlacesAndWins(new int[][]{{0, 2}, {1, 1}, {2, 0}});
     }

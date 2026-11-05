@@ -23,6 +23,43 @@ class PlayerTest {
         assertFalse(player.makeMove(board, -1, 0));
     }
 
+    /** Verifies both player types retain their configured marker. */
+    @Test
+    void playersExposeTheirConfiguredMarkers() {
+        Player human = new HumanPlayer('X', new Scanner(""));
+        Player cpu = new CpuPlayer('O', new Random(7));
+
+        assertEquals('X', human.getMarker());
+        assertEquals('O', cpu.getMarker());
+    }
+
+    /** Verifies player constructors reject markers outside the game rules. */
+    @Test
+    void playersRejectInvalidMarkers() {
+        assertThrows(IllegalArgumentException.class, () -> new HumanPlayer('Z', new Scanner("")));
+        assertThrows(IllegalArgumentException.class, () -> new CpuPlayer('Z', new Random(7)));
+    }
+
+    /** Verifies default human player names are unique and assigned in order. */
+    @Test
+    void humanPlayersReceiveUniqueDefaultNames() {
+        HumanPlayer first = new HumanPlayer();
+        HumanPlayer second = new HumanPlayer();
+
+        assertEquals("Player #1", first.getName());
+        assertEquals("Player #2", second.getName());
+    }
+
+    /** Verifies default CPU player names are unique and assigned in order. */
+    @Test
+    void cpuPlayersReceiveUniqueDefaultNames() {
+        CpuPlayer first = new CpuPlayer();
+        CpuPlayer second = new CpuPlayer();
+
+        assertEquals("CPU #1", first.getName());
+        assertEquals("CPU #2", second.getName());
+    }
+
     /** Verifies the human player retries malformed and occupied coordinates. */
     @Test
     void humanRetriesMalformedAndOccupiedPositions() {
